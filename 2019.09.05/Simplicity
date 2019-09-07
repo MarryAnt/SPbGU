@@ -26,9 +26,6 @@ int main(){
     int n, sum = 0;
     cin >> n;
     sum = dividors(n, sum);
-    if (sum == 0 && n > 1){
-        sum++;
-    }
     cout << sum;
     return 0;
 }
