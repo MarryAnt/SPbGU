@@ -7,7 +7,7 @@ int divisers(int a){
     if (a == 1){
         return 1;
     }
-    if (a%2 == 0){
+    else if (a%2 == 0){
        for(int i=2; i<a; i++){
             if(a%i==0){
                 s++;
