@@ -23,9 +23,9 @@ Rational Rational::Add (const Rational&s) const{
 	Rational Sum;
 	Sum.a = a*s.b+b*s.a;
 	Sum.b = b*s.b;
-	if (Sum.a>Sum.b){
+	if (abs(Sum.a)>abs(Sum.b)){
 		c = GCD(abs(Sum.a), abs(Sum.b));
-	}else{
+	} else{
         c = GCD(abs(Sum.b), abs(Sum.a));
 	}
 	Sum.a = Sum.a/c;
@@ -38,9 +38,9 @@ Rational Rational::Sub (const Rational&s) const{
 	Rational Sum;
 	Sum.a = a*s.b-b*s.a;
 	Sum.b = b*s.b;
-	if (Sum.a>Sum.b){
+	if (abs(Sum.a)>abs(Sum.b)){
 		c = GCD(abs(Sum.a), abs(Sum.b));
-	}else{
+	} else{
         c = GCD(abs(Sum.b), abs(Sum.a));
 	}
 	Sum.a = Sum.a/c;
@@ -54,9 +54,9 @@ Rational Rational::Mult (const Rational&s) const
 	Rational Sum;
 	Sum.a = a*s.a;
 	Sum.b = b*s.b;
-    if (Sum.a>Sum.b){
+    if (abs(Sum.a)>abs(Sum.b)){
 		c = GCD(abs(Sum.a), abs(Sum.b));
-	}else{
+	} else{
         c = GCD(abs(Sum.b), abs(Sum.a));
 	}
 	Sum.a = Sum.a/c;
@@ -69,9 +69,9 @@ Rational Rational::Div (const Rational&s) const{
 	Rational Sum;
 	Sum.a = a*s.b;
 	Sum.b = b*s.a;
-	if (Sum.a>Sum.b){
+	if (abs(Sum.a)>abs(Sum.b)){
 		c = GCD(abs(Sum.a), abs(Sum.b));
-	}else{
+	} else{
         c = GCD(abs(Sum.b), abs(Sum.a));
 	}
 	Sum.a = Sum.a/c;
@@ -85,25 +85,29 @@ Rational Rational::Compr (const Rational&s) const{
 	Sum.b = b*s.a;
 	if (Sum.a>Sum.b){
 		cout<<"First rational bigger than second"<<endl;
-	}else{
+	} else{
         cout<<"Second rational bigger than first"<<endl;
 	}
 	return Sum;
 	}
 
 void Rational::Print () const{
-	cout<<a<<"/"<<b<<endl;
+    int c;
+    if (abs(a)>abs(b)){
+        c = GCD(abs(a),abs(b));
+    } else{
+        c = GCD(abs(b),abs(a));
+    }
+	cout<<a/c<<"/"<<b/c<<endl;
 }
 
 int Rational::GCD (int c, int d) const{
-	 if (d == 0){
-		return c;
-	 }
-	if (c%d ==0 ){
-        return d;
-	}
-	return GCD(d, c%d);
-	}
+    if (d == 0){
+        return c;
+    } else{
+        return GCD(d, c%d);
+    }
+}
 
 int main(){
     Rational R1;
