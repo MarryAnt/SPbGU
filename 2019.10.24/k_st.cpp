@@ -30,7 +30,7 @@ int k_st(int arr[], int l, int r, int k){
         return k_st(arr, j+1, r, k);
     }
     else{
-        return p;
+        return arr[p];
     }
 }
 
