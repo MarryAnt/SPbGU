@@ -1,37 +1,58 @@
 #include <iostream>
-#include <cmath>
 
 using namespace std;
 
-int main(){
-    int n; //количество предметов
-    cin >> n;
-    int w[n]; //веса предметов
-    for(int i = 0; i < n; i++){
-        cin >> w[i];
-    }
-    int v[n]; //ценности предметов
-    for(int j = 0; j < n; j++){
-        cin >> v[j];
-    }
-    int W; //вместительность рюкзака
-    cin >> W;
-    int m[n+1][W+1];
-    for(int j = 0; j <= W; j++){
-        m[0][j] = 0;
-    }
-    for(int i = 0; i <= n; i++){
-        m[i][0] = 0;
-    }
-    for(int k = 1; k <= n; k++){
-        for(int s = 1; s <= W; s++){
-            if(s >= w[k-1]){
-                m[k][s] = max(m[k-1][s], m[k-1][s-w[k-1]] + v[k-1]);
-            } else{
-                m[k][s] = m[k-1][s];
-            }
+int Ssort(double arr[][2],int left,int right){
+    int i = left;
+    int j = right;
+    double t = (arr[(left + right)/2][1])/(arr[(left + right)/2][0]);
+    while (i <= j) {
+        while ((arr[i][1]/arr[i][0]) < t){
+            i++;
+        }
+        while ((arr[j][1]/arr[j][0]) > t){
+            j--;
+        }
+        if (i <= j) {
+            swap(arr[i][0],arr[j][0]);
+            swap(arr[i][1],arr[j][1]);
+            i++;
+            j--;
         }
     }
-    cout << m[n+1][W+1];
+    if (left < j){
+        Ssort(arr, left, j);
+    }
+    if (i < right){
+        Ssort(arr, i, right);
+    }
+    return 0;
+}
+int main(int argc, const char * argv[]) {
+    int n;
+    double M;
+    cin >> n >> M;
+    double arr[n][2];
+    for(int i=0;i<n;i++){
+        cin >> arr[i][0] >> arr[i][1];
+    }
+    for(int i=0;i<n;i++){
+        cout << "[" << arr[i][0] << arr[i][1] << "]";
+    }
+    cout << endl;
+    Ssort(arr,0,n-1); 
+    double sum=0;
+    for(int i=n-1;(i>=0)&&(M>0);i--){
+        if(M>arr[i][0]){
+            sum+=arr[i][1];
+            M-=arr[i][0];
+        } else{
+            cout << M;
+            sum+=(M/arr[i][0])*arr[i][1];
+            M-=arr[i][0];
+            cout << M;
+        }
+    }
+    cout << sum;
     return 0;
 }
