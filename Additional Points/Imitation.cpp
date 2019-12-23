@@ -138,8 +138,7 @@ double GlobalMax(double (*f)(Argu), Argu s, Argu &vm){
     return max;
 }
 
-int main()
-{
+int main(){
     Argu vs, vm, prvm;
     double prmval = 0, mval = 0;
     srand(time(0));
