@@ -7,7 +7,7 @@ public:
     KalmanFilter(
         double d,
         const Eigen::MatrixXd& A, //System dynamics matrix
-        const Eigen::MatrixXd& C, //Output matrix
+        const Eigen::MatrixXd& B, //Output matrix
         const Eigen::MatrixXd& Q, //Process noise covariance
         const Eigen::MatrixXd& R, //Measurement noise covariance
         const Eigen::MatrixXd& P  // Estimate error covariance
@@ -22,7 +22,7 @@ public:
     double time() { return t; };
 
 private:
-    Eigen::MatrixXd A, C, Q, R, P, K, P0; //Matrixes for computation
+    Eigen::MatrixXd A, B, Q, R, P, K, P0; //Matrixes for computation
     int m, n; //System dimensions
     double t0, t; //Starting (initial) and current time
     double d; //Discrete time step
